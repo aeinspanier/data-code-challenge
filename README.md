@@ -53,10 +53,8 @@ We will assess the solution based on the following criteria:
 ## Example Code
 In the `example_code` directory, you will find some example Python code for loading data to Neo4j.
 
-## Submission
-**Please commit your solution to a new repository on GitHub**.
+## Andrew Notes
 
-Feel free to use this repository as a starting point or to start from scratch. Include a `README.md` file that describes how to run the solution. 
-Please also include a description how to set up and reproduce the environment required to run the solution.
-
-Finally, email join@weave.bio with 1) the link to your solution repo and 2) your resume
+Docker image was too tricky to get to work.
+So I just used the destop version. Created a new database, then created a new user within the DB with username = superman, password = testing123
+followed this guide: https://towardsdatascience.com/neo4j-cypher-python-7a919a372be7
