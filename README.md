@@ -85,3 +85,12 @@ MATCH (n)
 RETURN n
 ```
 
+## Shutdown
+
+To kill the airflow containers, run the following command:
+
+```
+docker compose down --volumes --rmi all
+```
+
+
