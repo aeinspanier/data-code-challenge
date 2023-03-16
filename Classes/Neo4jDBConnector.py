@@ -1,15 +1,8 @@
-# Example code to load some data to Neo4j
-# This code is based on the example code from the Neo4j Python Driver
-# https://neo4j.com/docs/api/python-driver/current/
-
 from neo4j import GraphDatabase
 import logging
 from neo4j.exceptions import ServiceUnavailable
 
-from parsing_utils.parse_xml import read_file, get_protein, get_full_names, get_organism, get_references, get_features, get_genes
-
-class App:
-
+class Neo4jDBConnector():
     def __init__(self, uri, user, password):
         self.driver = GraphDatabase.driver(uri, auth=(user, password))
 
@@ -24,6 +17,34 @@ class App:
                 self._create_and_return_friendship, person1_name, person2_name)
             for row in result:
                 print("Created friendship between: {p1}, {p2}".format(p1=row['p1'], p2=row['p2']))
+
+    @staticmethod
+    def _create_protein():
+        pass
+    
+    @staticmethod
+    def _create_organism_relationship():
+        pass
+    
+    @staticmethod
+    def _create_full_name_relationship():
+        pass
+    
+    @staticmethod
+    def _create_reference_relationship():
+        pass
+    
+    @staticmethod
+    def _create_author_relationship():
+        pass
+    
+    @staticmethod
+    def _create_feature_relationship():
+        pass
+    
+    @staticmethod
+    def _create_gene_relationship():
+        pass
 
     @staticmethod
     def _create_and_return_friendship(tx, person1_name, person2_name):
@@ -60,13 +81,3 @@ class App:
         )
         result = tx.run(query, person_name=person_name)
         return [row["name"] for row in result]
-
-def original_fn():
-    # Aura queries use an encrypted connection using the "neo4j+s" URI scheme
-    uri = "bolt://localhost:7687"
-    user = "superman"
-    password = "testing123"
-    app = App(uri, user, password)
-    app.create_friendship("Alice", "David")
-    app.find_person("Alice")
-    app.close()
