@@ -93,4 +93,10 @@ To kill the airflow containers, run the following command:
 docker compose down --volumes --rmi all
 ```
 
+To clear out the database (caution: this will remove all nodes and all relationships):
+
+```
+MATCH (n)
+DETACH DELETE n
+```
 
