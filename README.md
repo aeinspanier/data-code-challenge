@@ -34,7 +34,7 @@ x-airflow-common:
   ...
 ```
 
-On Linux, you may have to run the command:
+Note: On Linux, you may have to run the command before continuing:
 
 ```
 mkdir -p ./dags ./logs ./plugins
