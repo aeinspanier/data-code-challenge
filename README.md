@@ -34,7 +34,14 @@ x-airflow-common:
   ...
 ```
 
-Start docker destop, and run the following commands:  
+On Linux, you may have to run the command:
+
+```
+mkdir -p ./dags ./logs ./plugins
+echo -e "AIRFLOW_UID=$(id -u)" > .env
+```
+
+Start docker destop, and run the following commands: 
 
 1. Builds the extended airflow container.
 ```
