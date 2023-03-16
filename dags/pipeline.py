@@ -20,9 +20,14 @@ def protein_pipeline():
         protein_parser = ProteinParser(data)
         return protein_parser.get_protein_data()
     
+    @task()
     def load(data: dict):
-        pass
+        uri = "bolt://host.docker.internal:7687"
+        user = "superman"
+        password = "testing123"
+        neo4j = Neo4jDBConnector(uri, user, password)
+        neo4j.load_protein_data(data)
 
-    extract()
+    load(extract())
 
 pipeline = protein_pipeline()

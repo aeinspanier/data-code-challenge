@@ -18,9 +18,28 @@ class Neo4jDBConnector():
             for row in result:
                 print("Created friendship between: {p1}, {p2}".format(p1=row['p1'], p2=row['p2']))
 
+    def load_protein_data(self, data):
+        with self.driver.session(database="neo4j") as session:
+            # Write transactions allow the driver to handle retries and transient errors
+            result = session.execute_write(
+                self._create_protein, data.get('protein'))
+            for row in result:
+                print(f"Created protein {row}")
+        
     @staticmethod
-    def _create_protein():
-        pass
+    def _create_protein(tx, protein_id):
+        query = (
+            "CREATE (p:Protein { id: $protein_id }) "
+            "RETURN p"
+        )
+        result = tx.run(query, protein_id=protein_id)
+        try:
+            return [row["p"]["id"] for row in result]
+        # Capture any errors along with the query and data for traceability
+        except ServiceUnavailable as exception:
+            logging.error("{query} raised an error: \n {exception}".format(
+                query=query, exception=exception))
+            raise
     
     @staticmethod
     def _create_organism_relationship():
